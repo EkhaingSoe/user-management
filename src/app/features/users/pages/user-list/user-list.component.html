@@ -1,0 +1,63 @@
+
+<div class=" max-w-[1400px] mx-auto">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-600 mb-1">User Role Permissions Listings</h1>
+    </div>
+    <button (click)="createUser()" class="text-green-500 text-3xl flex items-center justify-center rounded-full border border-green-500 w-10 h-10 " >
+        + 
+    </button>
+  </div>
+
+  <!-- Data Table Component -->
+  <app-data-table
+    [data]="users"
+    [columns]="columns"
+    [actions]="actions"
+    [loading]="loading"
+    [showSearch]="true"
+    [showPagination]="false"
+    [pageSize]="10"
+    searchPlaceholder="Search by name, phone, or department..."
+    (actionClick)="onTableAction($event)">
+
+    <ng-template #customCell let-row let-column="column" let-index="index">
+
+      <ng-container *ngIf="column.key === 'userName'">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-base flex-shrink-0">
+            {{ getUserInitial(row.userName) }}
+          </div>
+          <div>
+            <div class="font-semibold text-slate-800">{{ row.userName }}</div>
+            <div class="text-xs text-slate-400">Created by: {{ row.createdUserName }}</div>
+          </div>
+        </div>
+      </ng-container>
+      
+      <ng-container *ngIf="column.key === 'mobileNumber'">
+        <div>
+          <div class="font-mono font-medium text-slate-700">{{ row.mobileNumber }}</div>
+          <div class="text-xs text-slate-400">{{ row.operatorName }}</div>
+        </div>
+      </ng-container>
+    </ng-template>
+  </app-data-table>
+
+  <div *ngIf="showDeleteModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" (click)="closeDeleteModal()">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4" (click)="$event.stopPropagation()">
+      <div class="flex justify-between items-center p-5 border-b border-gray-100">
+        <h3 class="text-lg font-semibold text-slate-800">Delete User</h3>
+        <button (click)="closeDeleteModal()" class="text-slate-400 hover:text-slate-600 transition-colors text-xl">&times;</button>
+      </div>
+      <div class="p-5">
+        <p class="text-slate-600">Are you sure you want to delete user <strong class="text-slate-800">"{{ userToDelete?.userName }}"</strong>?</p>
+        <p class="text-sm text-red-500 mt-2">This action cannot be undone.</p>
+      </div>
+      <div class="flex justify-end gap-3 p-5 border-t border-gray-100">
+        <button (click)="closeDeleteModal()" class="px-4 py-2 rounded-lg border border-gray-300 text-slate-600 hover:bg-gray-50 transition-colors">Cancel</button>
+        <button (click)="deleteUser()" class="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

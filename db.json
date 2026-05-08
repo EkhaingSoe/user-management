@@ -1,0 +1,303 @@
+{
+  "users": [
+    {
+      "id": "aa5046130faded9790d4",
+      "userName": "lu gyi min",
+      "departmentName": "IT",
+      "companyName": "toto work",
+      "designation": "software developer",
+      "mobileNumber": "094555666888",
+      "operatorName": "MPT",
+      "userType": "Admin",
+      "transactionCount": 1,
+      "rolePermissionCount": 4,
+      "description": "to to test",
+      "createdUserName": "superAdmin",
+      "isActive": true,
+      "createdDateAndTime": "Thu, 27-April-2026 19:07:43",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "bb5046130faded9790d5",
+      "userName": "john doe",
+      "departmentName": "HR",
+      "companyName": "Green Tech Myanmar",
+      "designation": "HR Manager",
+      "mobileNumber": "094555666999",
+      "operatorName": "Ooredoo",
+      "userType": "Super Admin",
+      "transactionCount": 5,
+      "rolePermissionCount": 10,
+      "description": "Senior HR professional",
+      "createdUserName": "admin",
+      "isActive": true,
+      "createdDateAndTime": "Fri, 28-April-2026 10:15:22",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "cc5046130faded9790d6",
+      "userName": "jane smith",
+      "departmentName": "Sales",
+      "companyName": "Tech Solutions Ltd",
+      "designation": "Sales Executive",
+      "mobileNumber": "094555667000",
+      "operatorName": "MPT",
+      "userType": "User",
+      "transactionCount": 2,
+      "rolePermissionCount": 3,
+      "description": "Sales team member",
+      "createdUserName": "manager",
+      "isActive": false,
+      "createdDateAndTime": "Sat, 29-April-2026 14:30:15",
+      "updatedDateAndTime": ""
+    },
+    {
+      "userName": "ei khaing soe",
+      "departmentName": "kkkkkkkk",
+      "designation": "hhhhhhh",
+      "mobileNumber": "09456639939",
+      "companyName": "gjjjjjj",
+      "userType": "Super Admin",
+      "operatorName": "4333",
+      "transactionCount": 1,
+      "rolePermissionCount": 4,
+      "createdUserName": "ffgtgy",
+      "isActive": true,
+      "createdDateAndTime": "5/8/2026, 4:08:09 PM",
+      "updatedDateAndTime": "2026-05-08T09:38:31.329Z",
+      "description": "thsiiekekje",
+      "id": "7d64"
+    },
+    {
+      "id": "dd5046130faded9790d7",
+      "userName": "mike johnson",
+      "departmentName": "Finance",
+      "companyName": "Global Finance Corp",
+      "designation": "Financial Analyst",
+      "mobileNumber": "094555667111",
+      "operatorName": "MPT",
+      "userType": "User",
+      "transactionCount": 8,
+      "rolePermissionCount": 6,
+      "description": "Financial reporting specialist",
+      "createdUserName": "finance_admin",
+      "isActive": true,
+      "createdDateAndTime": "Sun, 30-April-2026 09:45:30",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "ee5046130faded9790d8",
+      "userName": "sarah wilson",
+      "departmentName": "Marketing",
+      "companyName": "Creative Agency Ltd",
+      "designation": "Marketing Manager",
+      "mobileNumber": "094555667222",
+      "operatorName": "Ooredoo",
+      "userType": "Admin",
+      "transactionCount": 12,
+      "rolePermissionCount": 8,
+      "description": "Digital marketing strategist",
+      "createdUserName": "marketing_admin",
+      "isActive": true,
+      "createdDateAndTime": "Mon, 01-May-2026 11:20:45",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "ff5046130faded9790d9",
+      "userName": "david brown",
+      "departmentName": "Operations",
+      "companyName": "Logistics Pro",
+      "designation": "Operations Manager",
+      "mobileNumber": "094555667333",
+      "operatorName": "MPT",
+      "userType": "Super Admin",
+      "transactionCount": 15,
+      "rolePermissionCount": 12,
+      "description": "Supply chain operations lead",
+      "createdUserName": "ops_admin",
+      "isActive": true,
+      "createdDateAndTime": "Tue, 02-May-2026 13:15:20",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "gg5046130faded9790da",
+      "userName": "lisa chen",
+      "departmentName": "IT",
+      "companyName": "Tech Innovations",
+      "designation": "System Administrator",
+      "mobileNumber": "094555667444",
+      "operatorName": "MPT",
+      "userType": "Admin",
+      "transactionCount": 9,
+      "rolePermissionCount": 7,
+      "description": "IT infrastructure management",
+      "createdUserName": "it_admin",
+      "isActive": true,
+      "createdDateAndTime": "Wed, 03-May-2026 15:30:10",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "hh5046130faded9790db",
+      "userName": "robert kim",
+      "departmentName": "Legal",
+      "companyName": "Legal Partners LLC",
+      "designation": "Legal Counsel",
+      "mobileNumber": "094555667555",
+      "operatorName": "Ooredoo",
+      "userType": "User",
+      "transactionCount": 4,
+      "rolePermissionCount": 5,
+      "description": "Corporate legal advisor",
+      "createdUserName": "legal_admin",
+      "isActive": true,
+      "createdDateAndTime": "Thu, 04-May-2026 10:45:55",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "ii5046130faded9790dc",
+      "userName": "emma davis",
+      "departmentName": "HR",
+      "companyName": "People First Inc",
+      "designation": "HR Specialist",
+      "mobileNumber": "094555667666",
+      "operatorName": "MPT",
+      "userType": "User",
+      "transactionCount": 6,
+      "rolePermissionCount": 4,
+      "description": "Employee relations specialist",
+      "createdUserName": "hr_admin",
+      "isActive": true,
+      "createdDateAndTime": "Fri, 05-May-2026 12:20:40",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "jj5046130faded9790dd",
+      "userName": "alex thompson",
+      "departmentName": "Sales",
+      "companyName": "Sales Force Pro",
+      "designation": "Senior Sales Rep",
+      "mobileNumber": "094555667777",
+      "operatorName": "MPT",
+      "userType": "User",
+      "transactionCount": 18,
+      "rolePermissionCount": 9,
+      "description": "Top performing sales representative",
+      "createdUserName": "sales_admin",
+      "isActive": true,
+      "createdDateAndTime": "Sat, 06-May-2026 14:10:25",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "kk5046130faded9790de",
+      "userName": "maria garcia",
+      "departmentName": "Finance",
+      "companyName": "Money Matters Corp",
+      "designation": "Accountant",
+      "mobileNumber": "094555667888",
+      "operatorName": "Ooredoo",
+      "userType": "User",
+      "transactionCount": 7,
+      "rolePermissionCount": 5,
+      "description": "Financial accounting specialist",
+      "createdUserName": "finance_admin",
+      "isActive": true,
+      "createdDateAndTime": "Sun, 07-May-2026 16:35:15",
+      "updatedDateAndTime": ""
+    },
+    {
+      "id": "ll5046130faded9790df",
+      "userName": "james wilson",
+      "departmentName": "Marketing",
+      "companyName": "Brand Builders",
+      "designation": "Content Creator",
+      "mobileNumber": "094555667999",
+      "operatorName": "MPT",
+      "userType": "User",
+      "transactionCount": 11,
+      "rolePermissionCount": 6,
+      "description": "Digital content and social media specialist",
+      "createdUserName": "marketing_admin",
+      "isActive": true,
+      "createdDateAndTime": "Mon, 08-May-2026 09:50:05",
+      "updatedDateAndTime": ""
+    }
+  ],
+  "companies": [
+    {
+      "companyName": "Toto Work Co., Ltd. update",
+      "description": "IT Solutions & Software Development Service Provider.",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "companyName": "Green Tech Myanmar",
+      "description": "Digital Transformation and Cloud Consulting Services.",
+      "remark": "Potential client for long-term project.",
+      "isActive": true,
+      "createdAt": "2026-02-10T10:00:00Z",
+      "updatedAt": "2026-05-01T11:20:00Z"
+    },
+    {
+      "id": "3",
+      "companyName": "Tech Solutions Ltd",
+      "description": "Comprehensive technology solutions provider.",
+      "remark": "Established partner since 2020.",
+      "isActive": true,
+      "createdAt": "2026-03-05T08:45:00Z",
+      "updatedAt": "2026-05-08T16:20:00Z"
+    },
+    {
+      "companyName": "Ei update",
+      "description": "ei kahing",
+      "id": "2820"
+    }
+  ],
+  "departments": [
+    {
+      "departmentName": "Engineering update",
+      "description": "Responsible for product development, architecture, and technical delivery.",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "departmentName": "Human Resources",
+      "description": "Handles recruiting, employee relations, and benefits administration.",
+      "createdAt": "2026-02-05T10:30:00Z",
+      "updatedAt": "2026-05-01T11:20:00Z"
+    },
+    {
+      "id": "3",
+      "departmentName": "Sales",
+      "description": "Drives customer acquisition, account growth, and sales strategy execution.",
+      "createdAt": "2026-03-12T08:15:00Z",
+      "updatedAt": "2026-05-05T13:45:00Z"
+    }
+  ],
+  "designations": [
+    {
+      "id": "1",
+      "designationName": "Senior Software Engineer",
+      "description": "Leads development of core product modules and mentors junior engineers.",
+      "createdAt": "2026-01-15T09:00:00Z",
+      "updatedAt": "2026-04-20T14:30:00Z"
+    },
+    {
+      "designationName": "Product Manager updagt",
+      "description": "Coordinates product planning, stakeholder communication, and delivery timelines.",
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "designationName": "HR Manager",
+      "description": "Oversees human resources operations and employee development programs.",
+      "createdAt": "2026-03-08T11:00:00Z",
+      "updatedAt": "2026-05-03T15:30:00Z"
+    },
+    {
+      "id": "8b62",
+      "designationName": "ei ",
+      "description": "kkkkkkkkkk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

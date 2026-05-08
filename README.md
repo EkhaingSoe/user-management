@@ -2,13 +2,65 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.
 
-## Development server
+## Development Setup
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Prerequisites
+- Node.js (v18 or higher)
+- npm
 
-## Code scaffolding
+### Installation
+1. Clone the repository
+2. Install dependencies: `npm install`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Running the Application
+
+#### 1. Start the JSON Server (Mock API)
+```bash
+npm run json-server
+```
+This will start the JSON Server on `http://localhost:3000` with the following endpoints:
+- `GET/POST/PUT/DELETE /users` - User management
+- `GET/POST/PUT/DELETE /companies` - Company management
+- `GET/POST/PUT/DELETE /departments` - Department management
+- `GET/POST/PUT/DELETE /designations` - Designation management
+
+#### 2. Start the Angular Development Server
+```bash
+npm start
+```
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## API Endpoints
+
+The application uses a local JSON Server for mock data. All CRUD operations are supported:
+
+### Users
+- `GET /users` - Get all users
+- `GET /users/:id` - Get user by ID
+- `POST /users` - Create new user
+- `PUT /users/:id` - Update user
+- `DELETE /users/:id` - Delete user
+
+### Companies
+- `GET /companies` - Get all companies
+- `GET /companies/:id` - Get company by ID
+- `POST /companies` - Create new company
+- `PUT /companies/:id` - Update company
+- `DELETE /companies/:id` - Delete company
+
+### Departments
+- `GET /departments` - Get all departments
+- `GET /departments/:id` - Get department by ID
+- `POST /departments` - Create new department
+- `PUT /departments/:id` - Update department
+- `DELETE /departments/:id` - Delete department
+
+### Designations
+- `GET /designations` - Get all designations
+- `GET /designations/:id` - Get designation by ID
+- `POST /designations` - Create new designation
+- `PUT /designations/:id` - Update designation
+- `DELETE /designations/:id` - Delete designation
 
 ## Build
 

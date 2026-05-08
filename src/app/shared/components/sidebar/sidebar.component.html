@@ -1,0 +1,143 @@
+<aside
+  class="fixed left-0 top-0 h-screen text-black transition-all duration-300 z-50"
+  [class.w-64]="!isCollapsed"
+  [class.w-20]="isCollapsed">
+
+
+  <div class="flex items-center justify-between p-5 border-b border-white/10">
+
+    <div
+      class="flex items-center gap-2 cursor-pointer"
+      routerLink="/">
+
+      <span
+        class="text-xl font-bold text-green-500 bg-clip-text"
+        *ngIf="!isCollapsed">
+        Bulk Translation Report
+      </span>
+    </div>
+
+    <button
+      (click)="toggleCollapse()"
+      class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+
+      <span class="text-sm">
+        {{ isCollapsed ? '→' : '←' }}
+      </span>
+    </button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="flex-1 py-6 px-3 space-y-2 overflow-y-auto">
+
+    <div *ngFor="let item of menuItems">
+
+      <!-- Parent Menu -->
+      <div
+        *ngIf="item.children; else singleMenu"
+        (click)="toggleMenu(item)"
+        class="flex items-center justify-between px-4 py-3 rounded-xl text-black  transition-all duration-200 cursor-pointer">
+
+        <div
+          class="flex items-center gap-3"
+          [class.justify-center]="isCollapsed">
+
+          <span class="text-xl min-w-[24px]">
+            {{ item.icon }}
+          </span>
+
+          <span
+            class="text-sm text-black font-medium"
+            *ngIf="!isCollapsed">
+            {{ item.label }}
+          </span>
+        </div>
+
+        <!-- Arrow -->
+        <span
+          *ngIf="!isCollapsed"
+          class="transition-transform duration-300 text-xs"
+          [class.rotate-180]="item.expanded">
+
+          ▼
+        </span>
+      </div>
+
+      <!-- Child Menus -->
+      <div
+        *ngIf="item.children && item.expanded && !isCollapsed"
+        class="ml-6 mt-2 space-y-2">
+
+        <a
+          *ngFor="let child of item.children"
+          [routerLink]="child.path"
+          routerLinkActive="text-green-500 font-bold  "
+          class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm  transition-all duration-200">
+
+          <span>
+            {{ child.icon }}
+          </span>
+
+          <span>
+            {{ child.label }}
+          </span>
+        </a>
+      </div>
+
+      <!-- Single Menu -->
+      <ng-template #singleMenu>
+
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="text-green-500 font-bold   "
+          [routerLinkActiveOptions]="{ exact: item.exact || false }"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl  transition-all duration-200 cursor-pointer"
+          [class.justify-center]="isCollapsed">
+
+          <span class="text-xl min-w-[24px]">
+            {{ item.icon }}
+          </span>
+
+          <span
+            class="text-sm font-medium"
+            *ngIf="!isCollapsed">
+
+            {{ item.label }}
+          </span>
+
+          <!-- Tooltip -->
+          <div
+            *ngIf="isCollapsed"
+            class="fixed left-20 bg-gray-900  text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50">
+
+            {{ item.label }}
+          </div>
+        </a>
+
+      </ng-template>
+
+    </div>
+
+  </nav>
+
+  <!-- Footer -->
+  <div class="p-4 border-t border-white/10">
+
+    <button
+      (click)="logout()"
+      class="flex items-center gap-3 w-full px-4 py-3 rounded-xl "
+      [class.justify-center]="isCollapsed">
+
+      <span class="text-xl">
+        🚪
+      </span>
+
+      <span
+        class="text-sm font-medium"
+        *ngIf="!isCollapsed">
+
+        Logout
+      </span>
+    </button>
+  </div>
+</aside>

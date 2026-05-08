@@ -1,0 +1,143 @@
+<div class="flex flex-col min-h-[calc(100vh-100px)] relative" >
+    <h3 class="text-2xl font-bold text-gray-600 mb-5" >Create User Role Permissions</h3>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex flex-col flex-1" >
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <app-form-input
+          formControlName="userName"
+          label="User Name"
+          type="text"
+          placeholder="Enter user name"
+          [required]="true"
+          [control]="userName">
+        </app-form-input>
+
+        <app-form-input
+          formControlName="password"
+          label="Password"
+          type="password"
+          placeholder="Enter password"
+          [required]="true"
+          [control]="password">
+        </app-form-input>
+
+        <app-form-input
+          formControlName="companyName"
+          label="Company Name"
+          type="text"
+          placeholder="Enter company name"
+          [required]="true"
+          [control]="companyName">
+        </app-form-input>
+
+         <app-form-input
+          formControlName="departmentName"
+          label="Department"
+          type="text"
+          placeholder="Enter department name"
+          [required]="true"
+          [control]="departmentName">
+        </app-form-input>
+
+         <app-form-input
+          formControlName="designation"
+          label="Designation"
+          type="text"
+          placeholder="Enter designation"
+          [required]="true"
+          [control]="designation">
+        </app-form-input>
+
+         <app-form-input
+          formControlName="mobileNumber"
+          label="Mobile Number"
+          type="tel"
+          placeholder="09xxxxxxxxx"
+          [required]="true"
+          [control]="mobileNumber">
+        </app-form-input>
+
+         <app-form-input
+          formControlName="operatorName"
+          label="Operator Name"
+          type="text"
+          placeholder="Enter operator name"
+          [required]="true"
+          [control]="operatorName">
+        </app-form-input>
+
+       <app-form-select
+        formControlName="userType"
+        label="User Type"
+        [options]="userTypeOptions"
+        [required]="true"
+        [control]="userType">
+        </app-form-select>
+
+         <app-form-input
+          formControlName="transactionCount"
+          label="Transaction Count"
+          type="number"
+          placeholder="Enter transaction count"
+          [required]="true"
+          [control]="transactionCount">
+        </app-form-input>
+
+         <app-form-input
+          formControlName="rolePermissionCount"
+          label="Role Permission Count"
+          type="number"
+          placeholder="Enter role permission count"
+          [required]="true"
+          [control]="rolePermissionCount">
+        </app-form-input>
+
+         <app-form-input
+          formControlName="createdUserName"
+          label="Created By"
+          type="text"
+          placeholder="Enter created user name"
+          [required]="true"
+          [control]="createdUserName">
+        </app-form-input>
+
+        <div class="flex items-center gap-2 mt-2">
+          <input
+            id="isActive"
+            type="checkbox"
+            formControlName="isActive"
+            class="h-4 w-4 bg-green-500 rounded border-gray-300 text-green-600 "
+          />
+          <label for="isActive" class="text-sm font-medium text-gray-700">Active</label>
+        </div>
+
+         <app-form-input
+          formControlName="description"
+          label="Description"
+          type="text"
+          placeholder="Enter description"
+          [required]="true"
+          [control]="description">
+        </app-form-input>
+      </div>
+
+    <div class="sticky bottom-0 left-0 right-0 bg-white p-6 flex justify-center gap-3 backdrop-blur-sm bg-white/90 border-t border-gray-50">
+      <button 
+        type="button"
+        (click)="cancel()"
+        class="px-6 w-52 py-2 border border-gray-300 font-medium rounded-full text-white bg-red-500 hover:bg-red-600 transition-colors shadow-sm">
+        Cancel
+      </button>
+      
+      <button 
+        type="submit"
+        [disabled]="submitting || userForm.invalid"
+        class="px-4 py-2 w-52 bg-green-500 text-white font-medium rounded-full hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm shadow-green-200">
+        <span class="flex items-center justify-center gap-2">
+            <span *ngIf="submitting" class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+            {{ submitting ? 'Saving...' : 'Save' }}
+        </span>
+      </button>
+    </div>
+  </form>
+</div>

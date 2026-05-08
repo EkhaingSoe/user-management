@@ -1,0 +1,25 @@
+<div >
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-semibold">Designations</h2>
+    <button 
+      (click)="onCreate()" 
+      class="flex items-center justify-center text-2xl w-10 h-10 text-green-600 transition-all duration-200 bg-white border border-green-500 rounded-full hover:bg-green-50 active:scale-95 shadow-sm"
+      title="Create Designation">
+      +
+    </button>
+  </div>
+
+  <app-data-table
+    [data]="designations"
+    [loading]="loading"
+    [columns]="[
+      { key: 'designationName', label: 'Designation Name' },
+      { key: 'description', label: 'Description' }
+    ]"
+    [actions]="[
+      { label: 'Edit', class: 'text-blue-600 hover:text-blue-800', action: 'edit' },
+      { label: 'Delete', class: 'text-red-600 hover:text-red-800', action: 'delete' }
+    ]"
+    (actionClick)="onAction($event)"
+  ></app-data-table>
+</div>
