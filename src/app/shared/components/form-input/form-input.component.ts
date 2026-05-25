@@ -76,8 +76,7 @@ export class FormInputComponent implements ControlValueAccessor {
 
     if (errors['required']) return `${this.label || 'This field'} is required`;
     if (errors['minlength'])
-      return `${this.label || 'This field'} must be at least ${errors['minlength'].requiredLength} characters`;
-    if (errors['maxlength'])
+      return `${this.label || 'This field'} must be at least ${errors['minlength'].requiredLength} characters`; if (errors['maxlength'])
       return `${this.label || 'This field'} cannot exceed ${errors['maxlength'].requiredLength} characters`;
     if (errors['min'])
       return `${this.label || 'This field'} must be at least ${errors['min'].min}`;

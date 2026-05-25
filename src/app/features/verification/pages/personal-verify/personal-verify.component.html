@@ -1,0 +1,281 @@
+<div class="container">
+  <!-- Search Section -->
+  <mat-card class="search-card">
+    <mat-card-header>
+      <mat-card-title>
+        Search User by Phone Number
+      </mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="searchForm" (ngSubmit)="searchUser()" class="search-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input 
+            matInput 
+            type="tel" 
+            formControlName="phoneNumber"
+            placeholder="e.g., 09785411326"
+          >
+          <!-- <mat-icon matPrefix>phone</mat-icon> -->
+          <mat-error *ngIf="phoneNumberControl?.hasError('required')">
+            Phone number is required
+          </mat-error>
+          <mat-error *ngIf="phoneNumberControl?.hasError('pattern')">
+            Enter a valid phone number (10-15 digits)
+          </mat-error>
+        </mat-form-field>
+        
+        <div class="button-group">
+          <button 
+            type="submit"
+            mat-raised-button 
+            color="primary"
+            [disabled]="isLoading || searchForm.invalid"
+          >
+            <!-- <mat-icon>search</mat-icon> -->
+            {{ isLoading ? 'Searching...' : 'Search' }}
+          </button>
+          
+          <button 
+            type="button"
+            mat-stroked-button 
+            (click)="resetForm()"
+          >
+            <!-- <mat-icon>clear</mat-icon> -->
+            Clear
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading Spinner -->
+  <div class="loading-overlay" *ngIf="isLoading">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading...</p>
+  </div>
+
+  <!-- User Data Display -->
+  <div *ngIf="verificationData && !isLoading" class="user-data">
+    
+    <!-- Status Banner -->
+    <mat-card class="status-card" [class]="'status-' + getCurrentStatus().toLowerCase()">
+      <mat-card-content>
+        <div class="status-banner">
+          <!-- <mat-icon>info_outline</mat-icon> -->
+          <span class="status-text">
+            Current Status: <strong>{{ getCurrentStatus() }}</strong>
+          </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Profile Information -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <!-- <mat-icon mat-card-avatar>person</mat-icon> -->
+        <mat-card-title>Personal Information</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>User Name:</label>
+            <span>{{ verificationData.userName }}</span>
+          </div>
+          <div class="info-item">
+            <label>Phone Number:</label>
+            <span>{{ verificationData.phoneNumber }}</span>
+          </div>
+          <div class="info-item">
+            <label>Agent Type:</label>
+            <span>{{ verificationData.agentType }}</span>
+          </div>
+          <div class="info-item">
+            <label>Registration Type:</label>
+            <span>{{ verificationData.regType }}</span>
+          </div>
+          <div class="info-item">
+            <label>Date of Birth:</label>
+            <span>{{ verificationData.dob }}</span>
+          </div>
+          <div class="info-item">
+            <label>Father's Name:</label>
+            <span>{{ verificationData.fatherName }}</span>
+          </div>
+          <div class="info-item">
+            <label>ID Proof Number:</label>
+            <span>{{ verificationData.idProofNumber }}</span>
+          </div>
+          <div class="info-item">
+            <label>Passport Country:</label>
+            <span>{{ verificationData.passportCountry }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Business Information -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <!-- <mat-icon mat-card-avatar>business</mat-icon> -->
+        <mat-card-title>Business Information</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Business Name:</label>
+            <span>{{ verificationData.businessName || 'N/A' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Business Category:</label>
+            <span>{{ verificationData.businessCategory || 'N/A' }}</span>
+          </div>
+          <div class="info-item">
+            <label>Business Sub-Category:</label>
+            <span>{{ verificationData.businessSubCategory || 'N/A' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Profile Picture -->
+    <mat-card class="image-card" *ngIf="verificationData.profilePic">
+      <mat-card-header>
+        <!-- <mat-icon mat-card-avatar>account_circle</mat-icon> -->
+        <mat-card-title>Profile Picture</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="profile-image">
+          <img 
+            [src]="verificationData.profilePic" 
+            alt="Profile Picture"
+            (click)="openImage(verificationData.profilePic)"
+          >
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- NRC Images -->
+    <mat-card class="image-card" *ngIf="nrcImages.length > 0">
+      <mat-card-header>
+        <!-- <mat-icon mat-card-avatar>description</mat-icon> -->
+        <mat-card-title>NRC Images</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="image-gallery">
+          <div *ngFor="let img of nrcImages; let i = index" class="gallery-item">
+            <img [src]="img" [alt]="'NRC Image ' + (i+1)" (click)="openImage(img)">
+            <div class="image-label">NRC Document {{i+1}}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Business Images -->
+    <mat-card class="image-card" *ngIf="businessImages.length > 0">
+      <mat-card-header>
+        <!-- <mat-icon mat-card-avatar>storefront</mat-icon> -->
+        <mat-card-title>Business Images</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="image-gallery">
+          <div *ngFor="let img of businessImages; let i = index" class="gallery-item">
+            <img [src]="img" [alt]="'Business Image ' + (i+1)" (click)="openImage(img)">
+            <div class="image-label">Business Image {{i+1}}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Logo Images -->
+    <mat-card class="image-card" *ngIf="logoImages.length > 0">
+      <mat-card-header>
+        <!-- <mat-icon mat-card-avatar>image</mat-icon> -->
+        <mat-card-title>Logo Images</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="image-gallery">
+          <div *ngFor="let img of logoImages; let i = index" class="gallery-item">
+            <img [src]="img" [alt]="'Logo Image ' + (i+1)" (click)="openImage(img)">
+            <div class="image-label">Logo Image {{i+1}}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Action Buttons (Incompleted / Rejected / Approved) -->
+    <mat-card class="action-card">
+      <mat-card-header>
+        <!-- <mat-icon mat-card-avatar>assignment_turned_in</mat-icon> -->
+        <mat-card-title>Update Verification Status</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="action-buttons">
+          <button 
+            mat-raised-button 
+            color="primary"
+            (click)="updateStatus('approved')"
+            [disabled]="isButtonDisabled(1)"
+          >
+            <!-- <mat-icon>check_circle</mat-icon> -->
+            Approved
+          </button>
+          
+          <button 
+            mat-raised-button 
+            color="warn"
+            (click)="updateStatus('incompleted')"
+            [disabled]="isButtonDisabled(3)"
+          >
+            <!-- <mat-icon>pending</mat-icon> -->
+            Incompleted
+          </button>
+          
+          <button 
+            mat-raised-button 
+            color="accent"
+            (click)="updateStatus('rejected')"
+            [disabled]="isButtonDisabled(0)"
+          >
+            <!-- <mat-icon>cancel</mat-icon> -->
+            Rejected
+          </button>
+        </div>
+        <p class="action-note">
+          Current status: <strong>{{ getCurrentStatus() }}</strong>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- No Data Message -->
+  <mat-card *ngIf="!verificationData && !isLoading && searchForm.get('phoneNumber')?.value && searchForm.touched" class="no-data-card">
+    <mat-card-content>
+      <div class="no-data">
+        <!-- <mat-icon>person_off</mat-icon> -->
+        <h3>No User Found</h3>
+        <p>No user found with phone number: <strong>{{ searchForm.get('phoneNumber')?.value }}</strong></p>
+        <p class="hint">Please check the phone number and try again.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Initial Message -->
+  <mat-card *ngIf="!verificationData && !isLoading && (!searchForm.get('phoneNumber')?.value || !searchForm.touched)" class="welcome-card">
+    <mat-card-content>
+      <div class="welcome-message">
+        <!-- <mat-icon>verified_user</mat-icon> -->
+        <h3>Personal Verification System</h3>
+        <p>Enter a phone number above to search and verify user information.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -26,6 +26,15 @@ import {
   heroBuildingOffice,
   heroRectangleGroup,
 } from '@ng-icons/heroicons/outline';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+// Angular Material Imports
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +43,13 @@ import {
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
     LucideAngularModule.pick({
       Home,
       Users,
@@ -54,7 +70,9 @@ import {
       heroRectangleGroup,
     }),
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

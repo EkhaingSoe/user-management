@@ -1,0 +1,18 @@
+<mat-card>
+  <h2>Business Verification</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Business Name</mat-label>
+      <input matInput formControlName="businessName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Registration Number</mat-label>
+      <input matInput formControlName="registrationNumber" />
+    </mat-form-field>
+
+    <div style="margin-top:12px">
+      <button mat-raised-button color="primary" type="submit">Verify</button>
+    </div>
+  </form>
+</mat-card>

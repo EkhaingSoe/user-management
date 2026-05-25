@@ -27,6 +27,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'verification',
+    loadChildren: () =>
+      import('./features/verification/verification.module').then(
+        (m) => m.VerificationModule,
+      ),
+  },
+  {
     path: 'designations',
     loadChildren: () =>
       import('./features/designation/designation.module').then(
