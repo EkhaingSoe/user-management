@@ -1,0 +1,172 @@
+<section class="content">
+  <div class="container-fluid">
+    
+    <!-- @for (b of breadcrums; track b) {
+      <div class="block-header">
+        <app-breadcrumb
+          [title]="b.title"
+          [items]="b.items"
+          [active_item]="b.active"
+          [itemPaths]="b.itemPaths">
+        </app-breadcrumb>
+      </div>
+    } -->
+
+    <div class="d-flex flex-column gap-3">
+
+      <mat-card class="cardWithShadow">
+        <mat-card-content>
+          <h5 class="mb-3">Search Cashback Configuration</h5>
+          <form [formGroup]="cashbackForm" (ngSubmit)="viewCashbackConfig()">
+            <div class="row g-3 align-items-center">
+              
+              <div class="col-md-5">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Agent Code</mat-label>
+                  <input 
+                    type="text" 
+                    matInput 
+                    formControlName="agentCode" 
+                    placeholder="Enter Agent Code">
+                  @if (f['agentCode'].hasError('required')) {
+                    <mat-error>Agent Code is required</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-5">
+                <mat-form-field class="w-100" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input 
+                    [type]="hidePassword ? 'password' : 'text'" 
+                    matInput 
+                    formControlName="password" 
+                    placeholder="Enter Password">
+                  <button 
+                    type="button"
+                    mat-icon-button 
+                    matSuffix 
+                    (click)="hidePassword = !hidePassword" 
+                    [attr.aria-label]="'Hide password'" 
+                    [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                  </button>
+                  @if (f['password'].hasError('required')) {
+                    <mat-error>Password is required</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-2 d-grid">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary py-2.5 mb-3 font-weight-bold" 
+                  [disabled]="cashbackForm.invalid">
+                  View Rules
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      @if (error) {
+        <div class="alert alert-danger">{{ error }}</div>
+      }
+      @if (success) {
+        <div class="alert alert-success">{{ success }}</div>
+      }
+
+      @if (cashbackDataList.length > 0) {
+        <div class="row g-3">
+          
+          <div class="col-12">
+            <mat-card class="cardWithShadow bg-light border">
+              <mat-card-content>
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                  <div>
+                    <span class="text-muted d-block small">Agent Reference</span>
+                    <strong class="fs-6 text-primary">{{ cashbackDataList[0].agentCode }}</strong>
+                  </div>
+                  <div>
+                    <span class="text-muted d-block small">Transaction ID</span>
+                    <strong>{{ cashbackDataList[0].transId }}</strong>
+                  </div>
+                  <div>
+                    <span class="text-muted d-block small">Vendor / Client Type</span>
+                    <span class="badge bg-secondary me-1">{{ cashbackDataList[0].vendorCode }}</span>
+                    <span class="badge bg-dark">{{ cashbackDataList[0].clientType }}</span>
+                  </div>
+                  <div>
+                    <span class="text-muted d-block small">Total Matrix Items</span>
+                    <span class="badge bg-info text-dark fs-6 font-weight-bold">{{ cashbackDataList[0].recordCount }} Rules Loaded</span>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="col-12">
+            <mat-card class="cardWithShadow">
+              <mat-card-content>
+                <h5 class="mb-3">Cashback Distribution Interval Schema</h5>
+                
+                <div class="table-responsive">
+                  <table mat-table [dataSource]="recordDataSource" class="w-100 structured-table">
+
+                    <ng-container matColumnDef="minRange">
+                      <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Minimum Limit </th>
+                      <td mat-cell *matCellDef="let record"> {{ record.minRange | number:'1.2-2' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="maxRange">
+                      <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Maximum Limit </th>
+                      <td mat-cell *matCellDef="let record"> {{ record.maxRange | number:'1.2-2' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="disbType">
+                      <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Disb. Type </th>
+                      <td mat-cell *matCellDef="let record">
+                        <span class="badge" [ngClass]="record.disbType === 'F' ? 'bg-indigo text-white' : 'bg-teal text-white'">
+                          {{ record.disbType === 'F' ? 'Fixed (F)' : 'Percentage (P)' }}
+                        </span>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="perAmount">
+                      <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Percentage Value </th>
+                      <td mat-cell *matCellDef="let record"> {{ record.perAmount }}% </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Fixed Distribution Amount </th>
+                      <td mat-cell *matCellDef="let record" class="font-weight-bold text-success"> {{ record.amount | number:'1.2-2' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Engine State Status </th>
+                      <td mat-cell *matCellDef="let record">
+                        <span class="badge" [ngClass]="record.status === 'ACTIVE' ? 'bg-success' : 'bg-danger'">
+                          {{ record.status }}
+                        </span>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+        </div>
+      }
+
+    </div>
+  </div>
+</section> 
+
+

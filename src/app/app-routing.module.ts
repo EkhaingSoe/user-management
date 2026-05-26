@@ -15,9 +15,7 @@ const routes: Routes = [
   {
     path: 'companies',
     loadChildren: () =>
-      import('./features/company/company.module').then(
-        (m) => m.CompanyModule,
-      ),
+      import('./features/company/company.module').then((m) => m.CompanyModule),
   },
   {
     path: 'departments',
@@ -34,6 +32,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'transactions',
+    loadChildren: () =>
+      import('./features/transaction/transaction.module').then(
+        (m) => m.TransactionModule,
+      ),
+  },
+   {
     path: 'designations',
     loadChildren: () =>
       import('./features/designation/designation.module').then(

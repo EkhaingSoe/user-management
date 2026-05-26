@@ -1,15 +1,16 @@
-// src/app/services/api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, timeout } from 'rxjs/operators';
-// import { environment } from '../../environments/environment';
+import { catchError, timeout } from 'rxjs/operators';
+import { environment } from '../../environment/environment';
+// Verify path fits your directory tree
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   private readonly DEFAULT_TIMEOUT = 30000;
+  private readonly baseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -20,10 +21,25 @@ export class ApiService {
     });
   }
 
+  /**
+   * Automatically combines base context paths with endpoints
+   * while allowing absolute network URLs to pass through safely.
+   */
+  private createFullUrl(url: string): string {
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    // Ensures clean concatenations regardless of leading slash rules
+    const formattedUrl = url.startsWith('/') ? url : `/${url}`;
+    return `${this.baseUrl}${formattedUrl}`;
+  }
+
   get<T>(url: string, params?: any): Observable<T> {
     const httpParams = this.buildParams(params);
+    const fullUrl = this.createFullUrl(url);
+
     return this.http
-      .get<T>(url, {
+      .get<T>(fullUrl, {
         headers: this.getHeaders(),
         params: httpParams,
       })
@@ -31,24 +47,30 @@ export class ApiService {
   }
 
   post<T>(url: string, body: any): Observable<T> {
+    const fullUrl = this.createFullUrl(url);
+
     return this.http
-      .post<T>(url, body, {
+      .post<T>(fullUrl, body, {
         headers: this.getHeaders(),
       })
       .pipe(timeout(this.DEFAULT_TIMEOUT), catchError(this.handleError));
   }
 
   put<T>(url: string, body: any): Observable<T> {
+    const fullUrl = this.createFullUrl(url);
+
     return this.http
-      .put<T>(url, body, {
+      .put<T>(fullUrl, body, {
         headers: this.getHeaders(),
       })
       .pipe(timeout(this.DEFAULT_TIMEOUT), catchError(this.handleError));
   }
 
   delete<T>(url: string): Observable<T> {
+    const fullUrl = this.createFullUrl(url);
+
     return this.http
-      .delete<T>(url, {
+      .delete<T>(fullUrl, {
         headers: this.getHeaders(),
       })
       .pipe(timeout(this.DEFAULT_TIMEOUT), catchError(this.handleError));
@@ -70,10 +92,8 @@ export class ApiService {
     let errorMessage = 'An unknown error occurred!';
 
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
